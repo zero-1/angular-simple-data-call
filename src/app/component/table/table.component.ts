@@ -20,19 +20,10 @@ export class TableComponent implements OnInit, OnDestroy {
   subs: Subscription;
 
   ngOnInit() {
+    // way 1
     this.dataProvider1$ = this.dataService.getDataOne();
 
-    // with error handling 
-/*
-    this.dataProvider1$ = this.dataService.getDataOne().pipe(
-      catchError((err) => {
-        return EMPTY;
-      })
-    )
-*/
-
-this.dataProvider3$ = this.dataService.getDataThree();
-
+    // way 2
     this.subs = this.dataService.getDataTwo()
       .subscribe(
         (value) => {
@@ -42,6 +33,10 @@ this.dataProvider3$ = this.dataService.getDataThree();
           console.log(error);
         }
       );
+
+    // way 3
+    this.dataProvider3$ = this.dataService.getDataThree();
+
   }
 
   ngOnDestroy() {
